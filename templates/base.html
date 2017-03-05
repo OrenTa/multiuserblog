@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+{% set navigation_bar = [
+	('/', 'home','Home'),
+	('/login','login','Login'),
+    ('/signup','signup','Signup'),
+    ('/myposts','myposts','My posts'),
+    ('/newpost','newpost','Add post'),
+    ('/logout','logout','Logout')
+] -%}
+{% set active_page = active_page|default('home') -%}
+
+<html>
+<head>
+	<title>{% block title %}{% endblock %} - My Blog</title>
+	<link type="text/css" rel="stylesheet" href="/static/main.css" />
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+</head>
+<body>
+	<div class="fixedtop">
+		<H1 id="maintitle"> The Kfar Saba Blog </H1>
+		<div id="logstatus">{{logstatus}}</div>
+		<br>
+		<ul id="menu">
+	  	{% for href, id, caption in navigation_bar %}
+  			<li{% if id == active_page %} class="active"{% endif
+  			%}><a href="{{ href|e }}">{{ caption|e }}</a></li>
+	  	{% endfor %}
+		</ul>
+	</div>
+	<hr>
+	<div id="content">
+		{% block content%}
+		{% endblock %}
+	</div>
+</body>
+</html>

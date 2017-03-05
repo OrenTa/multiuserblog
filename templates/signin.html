@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% set active_page = "login" %}
+{% block title %} 
+Sign In
+{% endblock %}
+
+{% block content %} 
+<form method="post">
+<h2>Sign in</h2>
+	<table>
+		<tr>
+			<td>Username</td>
+			<td>
+				<input type="text" name="username" value={{username}}> 
+			</td>
+			<td class="error">{{user_error}}</td>
+		</tr>
+		<tr>
+			<td>Password</td>
+			<td>
+				<input type="password" name="password" value={{password}}> 
+			</td>
+			<td class="error">{{pswd_error}}</td>
+		</tr>
+	</table>
+	<br>
+	<input class="btn" type="Submit" value="Login">
+</form>
+{% endblock %}
+

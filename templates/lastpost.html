@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% set active_page = "newpost" %}
+{% block title %} 
+New post
+{% endblock %}
+
+{% block content %} 
+<div class="post">
+	<div class="post_title">
+		<div id="subject">{{post.subject}}</div>
+		<div id="date">{{post.created.strftime('%d-%m-%Y')}}</div>
+	</div>
+	<div>Total Likes: {{post.Likes}}</div>
+	<hr>
+	<pre class="post_body">{{post.content}}</pre>
+	<h3>comments</h3>
+	{% for c in comments%}
+		<div class="comment">{{c.user.Name}}:"{{c.content}}"</div>
+	{% endfor %}
+	<br>
+</div>
+{% endblock %}

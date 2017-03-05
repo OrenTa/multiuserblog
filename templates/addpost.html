@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% set active_page = "newpost" %}
+{% block title %} 
+Add post
+{% endblock %}
+
+{% block content %} 
+<html>
+<h2>{{title}}</h2>
+<hr>
+<form method="post">
+	<label> <h3>Title </h3>
+		<input type="text" name="subject" value={{subject}}> <br>
+	</label>
+	<br>
+	<label><h3>Enter your post here </h3>
+		<textarea name="content" class="blogtext" placeholder="Enter your post here">{{content}}</textarea> <br>
+	</label>
+	<div class="error">{{error}}</div>
+	<br>
+	<input type="submit">
+	<input type="hidden" name="postid" value="{{postid}}">
+</form>
+{% endblock %}

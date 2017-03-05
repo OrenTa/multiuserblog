@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% set active_page = "signup" %}
+{% block title %} 
+Sign Up
+{% endblock %}
+
+{% block content %} 
+<form method="post">
+<h1>Signup</h1>
+	<table>
+		<tr>
+			<td> Username </td>
+			<td>
+				<input type="text" name="username" value={{username}}> 
+			</td>
+			<td class="error">{{user_error}}</td>
+		</tr>
+		<tr>
+			<td> Password </td>
+			<td>
+				<input type="password" name="password" value={{password}}> 
+			</td>
+			<td class="error">{{pswd_error}}</td>
+		</tr>
+		<tr>
+			<td>Verify your password</td>
+			<td>
+				<input type="password" name="verify" value={{verify}}>
+			</td>
+			<td class="error">{{verify_error}}</td>
+		</tr>
+		<tr>
+			<td>Email (optional)</td>
+			<td>
+				<input type="text" name="email" value={{email}}>
+			</td>
+			<td class="error">{{email_error}}</td>
+		</tr>
+	</table>
+	<br>
+	<input class="btn" type="submit" value="Sign Up">
+</form>
+{% endblock %}

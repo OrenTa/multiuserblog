@@ -1,0 +1,117 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+
+    width: 800px;
+    margin: 0 auto;
+    padding: 10px;
+    color: #003300;
+}
+
+pre {
+    white-space:pre-wrap
+}
+
+.error {
+    color: red;
+}
+
+.comment {
+    font-style: italic;
+    font-size: 12px;
+    color:grey;
+}
+
+.btn {
+	width: 100px;
+}
+
+#logstatus {
+	color:#6B8E23;
+}
+
+#maintitle {
+    color:#808000;
+}
+
+#like {
+    color:green;
+}
+
+#subject {
+    font-weight: bold;
+    width: 40%;
+    font-size: 18px;
+}
+
+#username {
+    font-weight: bold;
+    text-align: right;
+    width: 30%;
+}
+
+#date {
+    text-align: center;
+    width: 30%;
+}
+
+.post_title {
+    display: flex;
+
+}
+
+.post_body {
+    width: 100%;
+    color:black;
+    background-color: #f2f2f2;
+}
+
+.buttons {
+   display: flex; 
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    
+}
+
+.fixedtop
+{
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width:800px;
+    background-color: white;
+}
+
+#content {
+    margin-top: 130px;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111;
+}
+
+.active {
+    background-color: #4CAF50;
+}
+
+.blogtext {
+            width:80%;
+            height: 15em;
+}
