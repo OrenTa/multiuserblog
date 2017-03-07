@@ -5,34 +5,13 @@ import re
 import hmac
 import pdb
 import sys
+from models import User, Comment, Likes, Post
 
 from google.appengine.ext import db
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
                                autoescape=True)
-
-class User(db.Model):
-    Name = db.StringProperty(required=True)
-    HashedPassword = db.StringProperty(required=True)
-    Email = db.StringProperty(required=False)
-
-class Post(db.Model):
-    subject = db.StringProperty(required=True)
-    content = db.TextProperty(required=True)
-    created = db.DateTimeProperty(auto_now_add=True)
-    user = db.ReferenceProperty(User, collection_name='blog_posts')
-    likes = db.IntegerProperty(default=0)
-
-class Likes(db.Model):
-    user = db.ReferenceProperty(User, collection_name='user_likes')
-    post = db.ReferenceProperty(Post, collection_name='post_likes')
-
-class Comment(db.Model):
-    user = db.ReferenceProperty(User, collection_name='user_comments')
-    post = db.ReferenceProperty(Post, collection_name='post_comments')
-    content = db.StringProperty(required=True)
-
 #! TODOTODOTODO #!
 # cosmetics !!!
 
@@ -125,7 +104,6 @@ class Signup(Handler):
         email_ = self.request.get('email')
         if not email_:
             email_=""          
-
         result = check(username_, password_, verify_, email_)
         if result[8]:         
             hpassword = hmac.new(key,password_).hexdigest()
