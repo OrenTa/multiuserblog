@@ -1,3 +1,6 @@
+# Comment model
+# *************
+
 from google.appengine.ext import db
 from user import User
 from post import Post
