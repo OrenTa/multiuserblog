@@ -22,6 +22,8 @@ class Message(Handler):
             m = "You are now logged out. (g)"
         elif id=="8":
             m = "You can only delete your own posts. (g)"
+        elif id=="9":
+            m = "Something went wrong. (g)"
         self.render("message.html",message=m)
 
     def post(self,id):
@@ -41,5 +43,7 @@ class Message(Handler):
             m = "You are now logged out. (p)"
         elif id=="8":
             m = "You can only delete your own posts. (p)"
+        elif id=="9":
+            m = "Something went wrong. (p)"
         self.render("message.html",message=m)
 
