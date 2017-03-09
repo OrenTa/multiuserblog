@@ -1,5 +1,3 @@
-# Add http://webapp2.readthedocs.io/en/latest/guide/exceptions.html 404 and 500
-
 import os
 import webapp2
 import jinja2
@@ -41,7 +39,26 @@ class Main(Handler):
             delete_url="deletepost"
         self.render("main.html", logstatus=log_stat, posts=posts_, comment_url=comment_url, edit_url=edit_url,
                     delete_url=delete_url)
-                
+
+class BaseHandler(webapp2.RequestHandler):
+    def handle_exception(self, exception, debug):
+        # Set a custom message.
+        response.write('An error occurred.')
+
+        # If the exception is a HTTPException, use its error code.
+        # Otherwise use a generic 500 error code.
+        if isinstance(exception, webapp2.HTTPException):
+            response.set_status(exception.code)
+        else:
+            response.set_status(500)
+
+class HomeHandler(BaseHandler):
+    def get(self):
+        self.response.write('This is the HomeHandler.')
+
+class ProductListHandler(BaseHandler):
+    def get(self):
+        self.response.write('This is the ProductListHandler.')                
          
 
 app = webapp2.WSGIApplication([('/', Main),('/signup', Signup), ('/welcome', Welcome),

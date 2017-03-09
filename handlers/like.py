@@ -21,19 +21,24 @@ class Like(Handler):
             dbuser = User.get_by_id(int(cookie_uid))
             if dbuser and (dbuser.HashedPassword==cookie_hash): #it means there's a validated user       
                 log_stat="Signed in as " + dbuser.Name
-                dbpost = Post.get_by_id(int(self.request.get('postid')))
-                existing_likes = db.GqlQuery("SELECT * FROM Likes WHERE user = :n AND post = :m ", n=dbuser, m=dbpost)
-                #check if the user is trying to like his own post
-                if dbuser.key()==dbpost.user.key(): 
-                    check_own="own"
+                # dbpost = Post.get_by_id(int(self.request.get('postid')))
+                key = db.Key.from_path('Post', int(self.request.get('postid')))
+                dbpost = db.get(key)
+                if not dbpost:
+                    return self.redirect('login')
                 else:
-                    if existing_likes.count()==0:
-                        #create a new line in the likes table
-                        l = Likes(user=dbuser, post=dbpost)
-                        l.put()
-                    else: #otherwise - the like is removed or the user is not allowed to like his own
-                        for li in existing_likes:
-                            li.delete()                  
+                    existing_likes = db.GqlQuery("SELECT * FROM Likes WHERE user = :n AND post = :m ", n=dbuser, m=dbpost)
+                    #check if the user is trying to like his own post
+                    if dbuser.key()==dbpost.user.key(): 
+                        check_own="own"
+                    else:
+                        if existing_likes.count()==0:
+                            #create a new line in the likes table
+                            l = Likes(user=dbuser, post=dbpost)
+                            l.put()
+                        else: #otherwise - the like is removed or the user is not allowed to like his own
+                            for li in existing_likes:
+                                li.delete()                  
             else:
                 log_stat="Not signed in"
 
