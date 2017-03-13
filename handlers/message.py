@@ -24,6 +24,8 @@ class Message(Handler):
             m = "You can only delete your own posts. (g)"
         elif id=="9":
             m = "Something went wrong. (g)"
+        elif id=="10":
+            m = "You need to be logged-in to like a post. (g)"
         self.render("message.html",message=m)
 
     def post(self,id):
@@ -45,5 +47,7 @@ class Message(Handler):
             m = "You can only delete your own posts. (p)"
         elif id=="9":
             m = "Something went wrong. (p)"
+        elif id=="10":
+            m = "You need to be logged-in to like a post. (p)"
         self.render("message.html",message=m)
 
