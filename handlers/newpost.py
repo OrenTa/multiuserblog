@@ -38,31 +38,35 @@ class NewPost(Handler):
         content_ = self.request.get('content')
         user = self.request.cookies.get('user',-1)
         postid_= self.request.get('postid')
-        # if there's no cookie
-        if user==(-1):
-            self.render("signin.html", username="", password="", logstatus="Not signed in", title="add new post")
+        action = self.request.get('btn')
+        if action =='cancel':
+            self.redirect("/")
         else:
-            # check that the cookie is valid
-            (cookie_uid,cookie_hash) = user.split("|")
-            dbuser = User.get_by_id(int(cookie_uid))
-            if dbuser and (dbuser.HashedPassword==cookie_hash):
-                # now it checks if we're in a new blog post or editing an existing post.
-                if postid_=="": #this is a new post
-                    # print "Inside Post of Newpost - recognized it's a new post"
-                    # sys.stdout.flush()
-                    if content_ and subject_:
-                        p = Post(subject=subject_, content=content_, user=dbuser)
-                        b_key = p.put()
-                        self.redirect("/%d" % b_key.id())
-                    else:
-                        self.render("addpost.html", subject=subject_, content=content_, error="something is missing",
-                                    title="add new post")
-                else:# as postid_ is not empty editing existing post.                 
-                    dbpost = Post.get_by_id(int(postid_))
-                    dbpost.subject = subject_
-                    dbpost.content = content_
-                    dbpost.put()
-                    self.redirect("/")
-            # cookie is not valid
+            # if there's no cookie
+            if user==(-1):
+                self.render("signin.html", username="", password="", logstatus="Not signed in", title="add new post")
             else:
-                self.redirect("/message/4")
+                # check that the cookie is valid
+                (cookie_uid,cookie_hash) = user.split("|")
+                dbuser = User.get_by_id(int(cookie_uid))
+                if dbuser and (dbuser.HashedPassword==cookie_hash):
+                    # now it checks if we're in a new blog post or editing an existing post.
+                    if postid_=="": #this is a new post
+                        # print "Inside Post of Newpost - recognized it's a new post"
+                        # sys.stdout.flush()
+                        if content_ and subject_:
+                            p = Post(subject=subject_, content=content_, user=dbuser)
+                            b_key = p.put()
+                            self.redirect("/%d" % b_key.id())
+                        else:
+                            self.render("addpost.html", subject=subject_, content=content_, error="something is missing",
+                                        title="add new post")
+                    else:# as postid_ is not empty editing existing post.                 
+                        dbpost = Post.get_by_id(int(postid_))
+                        dbpost.subject = subject_
+                        dbpost.content = content_
+                        dbpost.put()
+                        self.redirect("/")
+                # cookie is not valid
+                else:
+                    self.redirect("/message/4")

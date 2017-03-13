@@ -1,5 +1,11 @@
 This project is designed to run on the Google App Engine
-It uses Python 2.7 for the backend code.
+_______________________________________________
+
+1. use markdown editor 
+2. cover all as in here  https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
+3.  including the online project link at google app engine
+
+### It uses Python 2.7 for the backend code.
 
 The Python code is using the following libraries:
 os

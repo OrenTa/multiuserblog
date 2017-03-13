@@ -27,20 +27,24 @@ class EditPost(Handler):
         subject_ = self.request.get('subject')
         content_ = self.request.get('content')
         postid_= self.request.get('postid')
+        action = self.request.get('btn')
         user = self.request.cookies.get('user',-1)
-        # if there's no cookie
-        if user==(-1):
-            self.render("signin.html", username="", password="", logstatus="Not signed in", title="add new post")
+        if action == 'cancel':
+            self.redirect("/")
         else:
-            # check that the cookie is valid
-            (cookie_uid,cookie_hash) = user.split("|")
-            dbuser = User.get_by_id(int(cookie_uid))
-            if dbuser and (dbuser.HashedPassword==cookie_hash):
-                dbpost = Post.get_by_id(int(postid_))
-                dbpost.subject = subject_
-                dbpost.content = content_
-                dbpost.put()
-                self.redirect("/")
-            # cookie is not valid
+            # if there's no cookie
+            if user==(-1):
+                self.render("signin.html", username="", password="", logstatus="Not signed in", title="add new post")
             else:
-                self.redirect("/message/4")
+                # check that the cookie is valid
+                (cookie_uid,cookie_hash) = user.split("|")
+                dbuser = User.get_by_id(int(cookie_uid))
+                if dbuser and (dbuser.HashedPassword==cookie_hash):
+                    dbpost = Post.get_by_id(int(postid_))
+                    dbpost.subject = subject_
+                    dbpost.content = content_
+                    dbpost.put()
+                    self.redirect("/")
+                # cookie is not valid
+                else:
+                    self.redirect("/message/4")
