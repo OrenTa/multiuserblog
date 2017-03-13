@@ -12,3 +12,4 @@ from welcome import Welcome
 from permalink import Permalink
 from myposts import MyPosts
 from message import Message
+from deletecommen import DeleteComment

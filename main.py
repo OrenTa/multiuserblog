@@ -10,7 +10,7 @@ from google.appengine.ext import db
 from models import User, Comment, Likes, Post
 from handlers import Signup, Check, Handler, Signin, Signout, DeletePost
 from handlers import EditPost, NewPost, DeletePost, AddComment, Like, Welcome
-from handlers import Permalink, MyPosts, Message
+from handlers import Permalink, MyPosts, Message, DeleteComment
 from handlers.config import *
           
 class Main(Handler):
@@ -33,12 +33,14 @@ class Main(Handler):
             comment_url="message/1"
             edit_url = "message/2"
             delete_url="message/5"
+            dcomment_url="message/1"
         else:
             comment_url="comment"
             edit_url="editpost"
             delete_url="deletepost"
+            dcomment_url="deletecomment"
         self.render("main.html", logstatus=log_stat, posts=posts_, comment_url=comment_url, edit_url=edit_url,
-                    delete_url=delete_url)
+                    delete_url=delete_url, dcomment_url=dcomment_url)
 
 class BaseHandler(webapp2.RequestHandler):
     def handle_exception(self, exception, debug):
@@ -66,4 +68,4 @@ app = webapp2.WSGIApplication([('/', Main),('/signup', Signup), ('/welcome', Wel
                                ('/newpost', NewPost), (r'/(\d+)', Permalink),('/like', Like),
                                ('/myposts', MyPosts),('/comment', AddComment),
                                (r'/message/(\d+)', Message), ('/editpost', EditPost),
-                               ('/deletepost', DeletePost)], debug=True)
+                               ('/deletepost', DeletePost), ('/deletecomment', DeleteComment)], debug=True)

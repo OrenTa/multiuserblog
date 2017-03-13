@@ -37,6 +37,13 @@ Main page
 		<input type="submit" name="submit" value="submit comment">
 		<input type="hidden" name="postid" value="{{post.key().id()}}">
 	</form>
+	{% for c in post.post_comments%}
+		<div class="comment">{{c.user.Name}}:"{{c.content}}"</div>
+		<form action="/{{dcomment_url}}" method="post">
+			<input id="deletec" type="submit" value="delete comment">
+			<input type="hidden" name="commentid" value="{{c.key().id()}}">
+		</form>
+	{% endfor %}
 	<br>
 	<hr>
 </div>

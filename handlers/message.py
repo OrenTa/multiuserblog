@@ -7,7 +7,7 @@ from handler import Handler
 class Message(Handler):
     def get(self,id):
         if id=="1":
-            m = "You need to be signed-in to comment on a post.(g)"
+            m = "You need to be signed-in to comment or delete a post.(g)"
         elif id=="2":
             m = "You need to be signed-in to edit your posts. (g)" 
         elif id=="3":
@@ -21,7 +21,7 @@ class Message(Handler):
         elif id=="7":
             m = "You are now logged out. (g)"
         elif id=="8":
-            m = "You can only delete your own posts. (g)"
+            m = "You can only delete your own posts and comments. (g)"
         elif id=="9":
             m = "Something went wrong. (g)"
         elif id=="10":
@@ -30,7 +30,7 @@ class Message(Handler):
 
     def post(self,id):
         if id=="1":
-            m = "You need to be signed-in to comment on a post.(p)"
+            m = "You need to be signed-in to comment or delete a post.(p)"
         elif id=="2":
             m = "You need to be signed-in to edit your posts.(p)" 
         elif id=="3":
@@ -44,7 +44,7 @@ class Message(Handler):
         elif id=="7":
             m = "You are now logged out. (p)"
         elif id=="8":
-            m = "You can only delete your own posts. (p)"
+            m = "You can only delete your own posts and comments. (p)"
         elif id=="9":
             m = "Something went wrong. (p)"
         elif id=="10":
