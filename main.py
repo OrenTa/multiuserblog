@@ -10,7 +10,7 @@ from google.appengine.ext import db
 from models import User, Comment, Likes, Post
 from handlers import Signup, Check, Handler, Signin, Signout, DeletePost
 from handlers import EditPost, NewPost, DeletePost, AddComment, Like, Welcome
-from handlers import Permalink, MyPosts, Message, DeleteComment
+from handlers import Permalink, MyPosts, Message, DeleteComment, EditComment
 from handlers.config import *
           
 class Main(Handler):
@@ -67,5 +67,5 @@ app = webapp2.WSGIApplication([('/', Main),('/signup', Signup), ('/welcome', Wel
                                ('/login', Signin), ('/logout',Signout),
                                ('/newpost', NewPost), (r'/(\d+)', Permalink),('/like', Like),
                                ('/myposts', MyPosts),('/comment', AddComment),
-                               (r'/message/(\d+)', Message), ('/editpost', EditPost),
+                               (r'/message/(\d+)', Message), ('/editpost', EditPost),(r'/editcomment/(\d+)',EditComment),
                                ('/deletepost', DeletePost), ('/deletecomment', DeleteComment)], debug=True)

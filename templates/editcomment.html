@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% set active_page = "newpost" %}
+{% block title %} 
+Edit comment
+{% endblock %}
+
+{% block content %} 
+<html>
+<form method="post">
+	<label> <h3>title </h3>
+		<input type="text" name="comment" value={{comment.content}}> <br>
+	</label>
+	<br>
+	<input type="submit" name="btn" value="save changes">
+	<input type="submit" name="btn" value="cancel">
+	<input type="hidden" name="commentid" value="{{comment.key().id()}}">
+</form>
+{% endblock %}
