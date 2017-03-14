@@ -5,23 +5,27 @@
 # otherwise we generate an erro saying you can only edit your own posts (2).
 
 from handler import Handler
-from check import Check
 from models import User, Post
-import hmac
 from google.appengine.ext import db
 
 
 class EditPost(Handler):
     def get(self):
-        user = self.request.cookies.get('user',-1)     
-        (cookie_uid,cookie_hash) = user.split("|")
-        dbuser = User.get_by_id(int(cookie_uid))
-        postid_=self.request.get('postid')
-        dbpost = Post.get_by_id(int(postid_))
-        if dbuser.key() == dbpost.user.key():
-            self.render("editpost.html", title ="edit post", post=dbpost, postid=postid_)
+        user = self.request.cookies.get('user',-1)
+        if user==(-1):
+           self.render("signin.html", username="", password="", logstatus="Not signed in", title="sign in")
         else:
-            self.redirect("/message/3")
+            (cookie_uid,cookie_hash) = user.split("|")
+            dbuser = User.get_by_id(int(cookie_uid))
+            postid_=self.request.get('postid')
+            dbpost = Post.get_by_id(int(postid_))
+            if dbpost and dbuser:
+                if dbuser.key() == dbpost.user.key():
+                    self.render("editpost.html", title ="edit post", post=dbpost, postid=postid_)
+                else:
+                    self.redirect("/message/3")
+            else:
+                self.redirect("/message/9")
 
     def post(self):
         subject_ = self.request.get('subject')
@@ -41,10 +45,13 @@ class EditPost(Handler):
                 dbuser = User.get_by_id(int(cookie_uid))
                 if dbuser and (dbuser.HashedPassword==cookie_hash):
                     dbpost = Post.get_by_id(int(postid_))
-                    dbpost.subject = subject_
-                    dbpost.content = content_
-                    dbpost.put()
-                    self.redirect("/")
+                    if dbpost:
+                        dbpost.subject = subject_
+                        dbpost.content = content_
+                        dbpost.put()
+                        self.redirect("/")
+                    else:
+                        self.redirect("/message/9")
                 # cookie is not valid
                 else:
                     self.redirect("/message/4")

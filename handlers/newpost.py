@@ -63,10 +63,13 @@ class NewPost(Handler):
                                         title="add new post")
                     else:# as postid_ is not empty editing existing post.                 
                         dbpost = Post.get_by_id(int(postid_))
-                        dbpost.subject = subject_
-                        dbpost.content = content_
-                        dbpost.put()
-                        self.redirect("/")
+                        if dbpost:
+                            dbpost.subject = subject_
+                            dbpost.content = content_
+                            dbpost.put()
+                            self.redirect("/")
+                        else:
+                            self.redirect("/message/9")
                 # cookie is not valid
                 else:
                     self.redirect("/message/4")

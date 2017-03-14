@@ -23,6 +23,10 @@ class Permalink(Handler):
             else:
                 log_stat="Not signed in"
         post = Post.get_by_id(int(blog_id))
-        comments_of_post = db.GqlQuery("SELECT * FROM Comment WHERE post =:m", m=post)
-        self.render("lastpost.html", post=post, logstatus=log_stat, comments=comments_of_post)            
+        if post:
+            comments_of_post = db.GqlQuery("SELECT * FROM Comment WHERE post =:m", m=post)
+            self.render("lastpost.html", post=post, logstatus=log_stat, comments=comments_of_post)
+        else:
+            self.redirect("/message/9")
+            
 
