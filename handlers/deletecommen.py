@@ -16,11 +16,14 @@ class DeleteComment(Handler):
             if dbuser and (dbuser.HashedPassword==cookie_hash): # cookie is valid
                 commentid_=self.request.get('commentid')
                 dbcomment = Comment.get_by_id(int(commentid_))
-                if dbcomment.user.key()==dbuser.key(): #verify the user is trying to delete his own comment
-                    dbcomment.delete()
-                    self.redirect("/")
-                else: #this is not his own comment
-                    self.redirect("/message/8")
+                if dbcomment:
+                    if dbcomment.user.key()==dbuser.key(): #verify the user is trying to delete his own comment
+                        dbcomment.delete()
+                        self.redirect("/")
+                    else: #this is not his own comment
+                        self.redirect("/message/8")
+                else:
+                    self.redirect("/message/9")
                     
             else: # cookie is not valid
                 self.redirect("/message/4")
