@@ -1,41 +1,32 @@
-ToDO:
-- conisder changing some buttons into a with herf 
-- add the verification on IDs in all required places
-- improve the README
+# Multi User Blog 
+https://newblog-161508.appspot.com
 
-Multi User Blog
-
-This project implements a multi-user blog platform. It enables sign-in users to create posts which implements their own blog. Other users can view posts, like them and 
-also add comments per post. The solution is designed to run on the Google App Engine service.  
+This project implements a multi-user blog platform. It enables users to write posts which implements their own blog. Other users can view posts, like them and 
+also add comments per post. All actions require to be signed-in to the site while reading/browsing can be done by anyone.
+The solution is designed to run on the Google App Engine. 
 
 
-Getting Started
-prerequisits
+# Getting Started
+### Prerequisits
 - setup a personal google account at the google cloud platform (you can use your regular gmail account for that)
 - download and install the python Google App Engine SDK from here https://cloud.google.com/appengine/downloads 
-- initialize your Google SDK environment 
-installing 
--download this github repository 
-running it
-- to run it locally go into the folder and type dev_appserverp.py .
-to deploy it follow the google app engine instructions on how to deploy it on your account.
+- initialize your Google SDK environment as described in the google documentation
 
-_______________________________________________
+### Installing 
+- Download/clone this github repository to your local machine
 
-1. use markdown editor 
-2. cover all as in here  https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
-3.  including the online project link at google app engine
+### Running it
+- To run it locally go into the folder of the project on your local machine and type dev_appserverp.py . 
+- This will start the local SDK server on your machine
+- You can then open your browser at http://127.0.0.1:8080/ and start using it
 
-see this one https://github.com/kamalgill/flask-appengine-template
+To deploy it follow the google app engine instructions on how to deploy it on your account.
+
+# Built with
+- Python 2.7
+- Google App Engine SDK
+- Python libraries WebApp2 and Jinja (templates)
+
+Note: The project was created as part of the Udacity Full Stack Web Developer nanodegree.
 
 
-### It uses Python 2.7 for the backend code.
-
-The Python code is using the following libraries:
-os
-webapp2
-jinja2
-re
-hmac
-pdb
-sys
