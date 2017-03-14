@@ -34,8 +34,10 @@ class DeletePost(Handler):
             if dbuser and (dbuser.HashedPassword==cookie_hash):
                 dbpost = Post.get_by_id(int(postid_))
                 if dbpost:
-                    dbpost.delete()
-                    self.redirect("/")
+                    if dbuser.key() == dbpost.user.key():
+                        dbpost.delete()
+                        self.redirect("/")
+                    self.redirect("/message/8")
                 else:
                     self.redirect("/message/9")
             # cookie is not valid

@@ -46,10 +46,13 @@ class EditPost(Handler):
                 if dbuser and (dbuser.HashedPassword==cookie_hash):
                     dbpost = Post.get_by_id(int(postid_))
                     if dbpost:
-                        dbpost.subject = subject_
-                        dbpost.content = content_
-                        dbpost.put()
-                        self.redirect("/")
+                        if dbuser.key() == dbpost.user.key(): 
+                            dbpost.subject = subject_
+                            dbpost.content = content_
+                            dbpost.put()
+                            self.redirect("/")
+                        else:
+                            self.redirect("/message/3")
                     else:
                         self.redirect("/message/9")
                 # cookie is not valid
